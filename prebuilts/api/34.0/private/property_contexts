@@ -532,6 +532,13 @@ persist.bluetooth.snooplogfilter.profiles.rfcomm.enabled    u:object_r:bluetooth
 persist.bluetooth.factoryreset                              u:object_r:bluetooth_prop:s0 exact bool
 persist.bluetooth.leaudio.allow_list                        u:object_r:bluetooth_prop:s0 exact string
 
+bluetooth.a2dp.source.sbc_priority.config            u:object_r:bluetooth_config_prop:s0 exact int
+bluetooth.a2dp.source.aac_priority.config            u:object_r:bluetooth_config_prop:s0 exact int
+bluetooth.a2dp.source.aptx_priority.config           u:object_r:bluetooth_config_prop:s0 exact int
+bluetooth.a2dp.source.aptx_hd_priority.config        u:object_r:bluetooth_config_prop:s0 exact int
+bluetooth.a2dp.source.ldac_priority.config           u:object_r:bluetooth_config_prop:s0 exact int
+bluetooth.a2dp.source.lc3_priority.config            u:object_r:bluetooth_config_prop:s0 exact int
+
 bluetooth.hardware.power.operating_voltage_mv        u:object_r:bluetooth_config_prop:s0 exact int
 bluetooth.hardware.power.idle_cur_ma                 u:object_r:bluetooth_config_prop:s0 exact int
 bluetooth.hardware.power.tx_cur_ma                   u:object_r:bluetooth_config_prop:s0 exact int
@@ -549,6 +556,10 @@ bluetooth.core.le_audio.inband_ringtone.supported    u:object_r:bluetooth_config
 
 bluetooth.device.default_name                        u:object_r:bluetooth_config_prop:s0 exact string
 bluetooth.device.class_of_device                     u:object_r:bluetooth_config_prop:s0 exact string
+
+bluetooth.device.m_rsplen_workaround                 u:object_r:bluetooth_config_prop:s0 exact bool
+
+bluetooth.le.disable_apcf_extended_features          u:object_r:bluetooth_config_prop:s0 exact bool
 
 bluetooth.profile.a2dp.sink.enabled                  u:object_r:bluetooth_config_prop:s0 exact bool
 bluetooth.profile.a2dp.source.enabled                u:object_r:bluetooth_config_prop:s0 exact bool
@@ -1111,6 +1122,8 @@ ro.product.vendor_dlkm.name         u:object_r:build_vendor_prop:s0 exact string
 ro.product.brand_for_attestation u:object_r:build_attestation_prop:s0 exact string
 ro.product.model_for_attestation u:object_r:build_attestation_prop:s0 exact string
 ro.product.name_for_attestation  u:object_r:build_attestation_prop:s0 exact string
+ro.product.device_for_attestation  u:object_r:build_attestation_prop:s0 exact string
+ro.product.manufacturer_for_attestation  u:object_r:build_attestation_prop:s0 exact string
 
 # GRF property for the first api level of the vendor partition
 ro.board.first_api_level u:object_r:build_vendor_prop:s0 exact int
@@ -1263,6 +1276,7 @@ wifi.aware.interface      u:object_r:wifi_hal_prop:s0 exact string
 wifi.concurrent.interface u:object_r:wifi_hal_prop:s0 exact string
 wifi.direct.interface     u:object_r:wifi_hal_prop:s0 exact string
 wifi.interface            u:object_r:wifi_hal_prop:s0 exact string
+wifi.interface.           u:object_r:wifi_hal_prop:s0 prefix string
 wlan.driver.status        u:object_r:wifi_hal_prop:s0 exact enum ok unloaded
 
 ro.boot.wificountrycode u:object_r:wifi_config_prop:s0 exact string
@@ -1423,9 +1437,6 @@ remote_provisioning.tee.rkp_only u:object_r:remote_prov_prop:s0 exact bool
 
 # Hostname for the remote provisioning server a device should communicate with
 remote_provisioning.hostname u:object_r:remote_prov_prop:s0 exact string
-
-# Indicates the system should use rkpd instead of RemoteProvisioner
-remote_provisioning.enable_rkpd u:object_r:remote_prov_prop:s0 exact bool
 
 # Broadcast boot stages, which keystore listens to
 keystore.boot_level u:object_r:keystore_listen_prop:s0 exact int

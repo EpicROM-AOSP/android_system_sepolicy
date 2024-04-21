@@ -85,7 +85,7 @@ neverallow {
 # permission only makes sense within a domain (hence should
 # never be granted to any other domain within mlstrustedsubject)
 # and an untrusted app is allowed fork permission to itself.
-neverallow all_untrusted_apps mlstrustedsubject:process fork;
+neverallow { all_untrusted_apps -mediaprovider_app } mlstrustedsubject:process fork;
 
 # Do not allow untrusted apps to hard link to any files.
 # In particular, if an untrusted app links to other app data
@@ -295,3 +295,6 @@ neverallow {
 # anon_inode usages like userfaultfd and io_uring. This prevents us from
 # creating a more fine-grained neverallow policy for each anon_inode usage.
 neverallow all_untrusted_apps domain:anon_inode *;
+
+# Do not allow untrusted app access to hidraw devices.
+neverallow all_untrusted_apps hidraw_device:chr_file *;
